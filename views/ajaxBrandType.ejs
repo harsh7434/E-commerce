@@ -1,0 +1,22 @@
+<div class="row mb-3">
+    <label for="inputText" class="col-sm-4 col-form-label">Select Brand</label>
+    <div class="col-sm-8">
+      <select name="probrand_name" class="form-control">
+          <option value="0">Please select brand</option>
+          <% for(var bt of brand){%>
+              <option value="<%= bt.id%>"><%= bt.brand_name%></option>
+          <%}%>
+      </select>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="inputText" class="col-sm-4 col-form-label">Select Tpye</label>
+    <div class="col-sm-8">
+      <select name="protype_name" class="form-control">
+          <option value="0">Please select type</option>
+          <% for(var td of type){%>
+              <option value="<%= td.id%>"><%= td.type_name%></option>
+          <%}%>
+      </select>
+    </div>
+  </div>

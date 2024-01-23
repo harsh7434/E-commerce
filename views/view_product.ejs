@@ -1,0 +1,90 @@
+<%- include("header")%>
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>View Poducts</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/admin/deshboard">Home</a></li>
+          <li class="breadcrumb-item">Poducts</li>
+          <li class="breadcrumb-item active">view Poducts</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <div class="container mt-5 px-2">
+      <form class="mb-2 d-flex  align-items-center">
+        <div class="position-relative">
+          <input class="form-control w-100" placeholder="Search Produc Name" value="" name="search" type="text">
+        </div>
+        <div class="px-2">
+          <input type="submit" value="search" class="form-control bg-primary text-white">
+        </div>
+      </form>
+
+
+      <!-- Data form -->
+      <form>
+        <div class="d-flex">
+          <% if(ProductData !='' ){%>
+            <% for(var ad of ProductData){%>
+              <div class="col-lg-4">
+                <div class="card" style="width: 20rem;">
+                  <img src="<%= ad.Product_Image%>"  height="380px" class="card-img-top">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= ad.product_title.slice(0,22)%>..</h5>
+                    <h6>&#8377;<%= ad.product_price%>/<s>&#8377;<%= ad.product_oldprice%></s></h6>
+                    <p class="card-text">
+                      <%= ad.product_description.slice(0,19)%>..
+                    </p>
+                    <a href="/admin/product/view_more/<%= ad.id%>" class="btn btn-primary py-2">View More</a>
+                    <% if(ad.isActive){ %>
+                      <a href="/admin/product/setDeactive/<%= ad.id%>"
+                        class="border-0 alert alert-success py-2 px-4 mx-3 text-center">Active</a>
+                      <%}else{%>
+                        <a href="/admin/product/setActive/<%= ad.id%>"
+                          class="border-0 alert alert-danger py-2 mx-3 text-center">Deactive</a>
+                        <%}%>
+                          <a href="/admin/product/deleteProductData/<%= ad.id%>" class="btn btn-danger py-2 btn-sm"><i
+                              class="bi bi-trash"></i>
+                          </a>
+                  </div>
+                </div>
+              </div>
+              <%}}else{%>
+                <tr>
+                  <td colspan="10">No Record</td>
+                </tr>
+                <%}%>
+        </div>
+      </form>
+      <tr>
+        <td colspan="10">
+          <% var i=0;%>
+            <%var pre=parseInt(cpage-1)%>
+              <% if(pre>=0){%>
+                <a href="?page=<%=pre%>" class="bg-success text-white p-2 rounded">
+                  < Pre</a>
+                    <%}%>
+                      <a href="?page=<%=i%>&search=<%=search%>" class="bg-secondary text-white p-2 rounded">
+                        <%= parseInt(page)+1%>
+                      </a>
+                      <%var nextpage=parseInt(cpage)+1%>
+                        <% if(totaldoc>nextpage){%>
+                          <a href="?page=<%=nextpage%>" class="bg-success text-white p-2 rounded">Next></a>
+                          <%}%>
+        </td>
+      </tr>
+    </div>
+
+  </main><!-- End #main -->
+
+  <%- include("footer")%>
+
+
+    <script>
+      $(document).ready(function () {
+        $("#ckbCheckAll").click(function () {
+          $(".checkBoxClass").attr('checked', this.checked);
+        });
+      });
+    </script>

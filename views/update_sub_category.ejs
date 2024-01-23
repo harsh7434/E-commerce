@@ -1,0 +1,62 @@
+<%- include("header")%>
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Update Sub_Category Data</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/admin/deshboard">Home</a></li>
+          <li class="breadcrumb-item">Sub_Category</li>
+          <li class="breadcrumb-item active">update Sub_Category</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-10">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Update Sub_Category</h5>
+
+              <!-- General Form Elements -->
+              <form action="/admin/sub_category/EditSubcatData" method="post">
+                <input type="hidden" name="EditId" value="<%= up.id%>">
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-4 col-form-label">Category</label>
+                  <div class="col-sm-8">
+                    <select name="cat_name" id="select" class="form-control">
+                        <option value="0">Please select Category</option>
+                        <% var catup = up%>
+                        <% for(var ct of cr){%>
+                            <option value="<%= ct.id%>" <% if(ct.id == up.cat_name){%><%= 'selected'%><%}%>><%= ct.category_name%></option>
+                        <%}%>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-4 col-form-label">Enter Sub Category</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="sub_category_name" value="<%= up.sub_category_name%>" placeholder="Enter Name" class="form-control">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit Form</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  
+<%- include("footer")%>

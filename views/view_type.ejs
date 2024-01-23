@@ -1,0 +1,128 @@
+<%- include("header")%>
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>View Types</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/admin/deshboard">Home</a></li>
+          <li class="breadcrumb-item">Types</li>
+          <li class="breadcrumb-item active">view Types</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <div class="container mt-5 px-2">
+      <form class="mb-2 d-flex  align-items-center">
+        <div class="position-relative">
+          <input class="form-control w-100" placeholder="Search Type" value="" name="search" type="text">
+        </div>
+        <div class="px-2">
+          <input type="submit" value="search" class="form-control bg-primary text-white">
+        </div>
+      </form>
+
+
+      <!-- Data form -->
+      <div class="table-responsive">
+        <table class="table table-responsive table-striped">
+
+          <form action="/admin/type/deleteAllType" method="post">
+            <thead>
+              <tr class="bg-light">
+                <th scope="col" width="5%">
+                  <label>
+                    <input class="form-check-input border-3 border-secondary" style="width: 20px; height: 20px;"
+                      type="checkbox" id="ckbCheckAll">
+                    <button style="margin: 0px 0px 0px 2px;transform: translate(5px, 1px); border: 0;" class="item"
+                      data-toggle="tooltip" data-placement="top" title="DeleteAll">
+                      <i class="bi bi-archive-fill"></i>
+                    </button>
+                  </label>
+                </th>
+                <th scope="col" width="12%">CATEGORY</th>
+                <th scope="col" width="12%">SUB CATEGORY</th>
+                <th scope="col" width="12%">EXTRA CATEGORY</th>
+                <th scope="col" width="12%">TYPE</th>
+                <th scope="col" width="5%">STATUS</th>
+                <th scope="col" width="5%">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if(TypeData !='' ){%>
+                <% for(var ad of TypeData){%>
+                  <tr>
+                    <th scope="row">
+                      <label>
+                        <input class="checkBoxClass form-check-input border-3 border-secondary"
+                          style="width: 20px; height: 20px;" type="checkbox" name="deleteall[]" value="<%= ad.id%>">
+                      </label>
+                    </th>
+                    <td>
+                      <%= ad.typecat_name.category_name%>
+                    </td>
+                    <td>
+                      <%= ad.typeSubCat_name.sub_category_name%>
+                    </td>
+                    <td>
+                      <%= ad.typeExtra_name.extra_category_name%>
+                    </td>
+                    <td>
+                      <%= ad.type_name%>
+                    </td>
+                    <td>
+                      <% if(ad.isActive){ %>
+                        <a href="/admin/type/setDeactive/<%= ad.id%>"
+                          class="alert alert-success d-block text-center">Active</a>
+                        <%}else{%>
+                          <a href="/admin/type/setActive/<%= ad.id%>"
+                            class="alert alert-danger d-block text-center">Deactive</a>
+                          <%}%>
+                    </td>
+                    <td>
+                      <a href="/admin/type/updateTypeData/<%= ad.id%>" class="btn btn-primary btn-sm"><i
+                        class="bi bi-upload"></i></a>
+                      <a href="/admin/type/deleteTypeData/<%= ad.id%>" class="btn btn-danger btn-sm"><i
+                          class="bi bi-trash"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  <%}}else{%>
+                    <tr>
+                      <td colspan="10">No Record</td>
+                    </tr>
+                    <%}%>
+                      <tr>
+                        <td colspan="10">
+                          <% var i=0;%>
+                          <%var pre=parseInt(cpage-1)%>
+                          <% if(pre>=0){%>
+                            <a href="?page=<%=pre%>" class="bg-success text-white p-2 rounded">
+                              < Pre</a>
+                          <%}%>
+                              <a href="?page=<%=i%>&search=<%=search%>" class="bg-secondary text-white p-2 rounded">
+                                <%= parseInt(page)+1%>
+                              </a>
+                          <%var nextpage=parseInt(cpage)+1%>
+                          <% if(totaldoc>nextpage){%>
+                            <a href="?page=<%=nextpage%>" class="bg-success text-white p-2 rounded">Next></a>
+                          <%}%>
+                        </td>
+                      </tr>
+            </tbody>
+          </form>
+        </table>
+      </div>
+    </div>
+
+  </main><!-- End #main -->
+
+  <%- include("footer")%>
+
+
+    <script>
+      $(document).ready(function () {
+        $("#ckbCheckAll").click(function () {
+          $(".checkBoxClass").attr('checked', this.checked);
+        });
+      });
+    </script>

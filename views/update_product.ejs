@@ -1,0 +1,173 @@
+<%- include("header")%>
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Update Product Data</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/admin/deshboard">Home</a></li>
+          <li class="breadcrumb-item">Product</li>
+          <li class="breadcrumb-item active">update Product</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-10">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Update Product</h5>
+
+              <!-- General Form Elements -->    
+              <form action="/admin/product/EditProductData" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="EditId" value="<%= up.id%>">
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-4 col-form-label">Category</label>
+                  <div class="col-sm-8">
+                    <select name="procat_name" id="categoryID" onchange="return getSubcatData()" class="form-control">
+                        <option value="0">Please select Category</option>
+                        <% for(var ct of cr){%>
+                            <option value="<%= ct.id%>"<% if(ct.id == up.procat_name){%><%= 'selected'%><%}%>><%= ct.category_name%></option>
+                        <%}%>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-4 col-form-label">Sub Category</label>
+                  <div class="col-sm-8">
+                    <select name="proSubCat_name" id="SubCatId" onchange="return getextraData()" class="form-control">
+                        <option value="0">Please select Sub_Category</option>
+                        <% for(var ct of sr){%>
+                            <option value="<%= ct.id%>" <% if(ct.id == up.proSubCat_name){%><%= 'selected'%><%}%>><%= ct.sub_category_name%></option>
+                        <%}%>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-4 col-form-label">Extra Category</label>
+                  <div class="col-sm-8">
+                    <select name="proExtra_name" id="extraId" class="form-control">
+                        <option value="0">Please select Extra_Category</option>
+                        <% for(var ct of er){%>
+                            <option value="<%= ct.id%>" <% if(ct.id == up.proExtra_name){%><%= 'selected'%><%}%>><%= ct.extra_category_name%></option>
+                        <%}%>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-4 col-form-label">Brand</label>
+                  <div class="col-sm-8">
+                    <select name="probrand_name" id="select" class="form-control">
+                        <option value="0">Please select Brand</option>
+                        <% for(var ct of br){%>
+                            <option value="<%= ct.id%>" <% if(ct.id == up.probrand_name){%><%= 'selected'%><%}%>><%= ct.brand_name%></option>
+                        <%}%>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-4 col-form-label">Type</label>
+                  <div class="col-sm-8">
+                    <select name="protype_name" id="select" class="form-control">
+                        <option value="0">Please select Type</option>
+                        <% for(var ct of tr){%>
+                            <option value="<%= ct.id%>" <% if(ct.id == up.protype_name){%><%= 'selected'%><%}%>><%= ct.type_name%></option>
+                        <%}%>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-4 col-form-label">Enter Product</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="product_title" value="<%= up.product_title%>"  class="form-control">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-4 col-form-label">Enter Product Price</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="product_price" value="<%= up.product_price%>" class="form-control">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-4 col-form-label">Enter Product Old-Price</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="product_oldprice" value="<%= up.product_oldprice%>" class="form-control">
+                  </div>
+                </div>
+                <fieldset class="row mb-3">
+                  <legend class="col-form-label col-sm-4 pt-0">Select Product Color</legend>
+                  <div class="col-sm-8">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="product_color" id="gridRadios1" value="black" <% if(up.product_color=='black'){%><%= 'checked'%><%}%>>
+                      <label class="form-check-label" for="gridRadios1">Black</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="product_color" id="gridRadios2" value="yellow" <% if(up.product_color=='yellow'){%><%= 'checked'%><%}%>>
+                      <label class="form-check-label" for="gridRadios2">Yellow</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="product_color" id="gridRadios3" value="gray" <% if(up.product_color=='gray'){%><%= 'checked'%><%}%>>
+                      <label class="form-check-label" for="gridRadios3">Gray</label>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="row mb-3">
+                    <legend class="col-form-label col-sm-4 pt-0">Select Product Size</legend>
+                    <div class="col-sm-8">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="product_size" id="gridRadiosA" value="30" <% if(up.product_size=='30'){%><%= 'checked'%><%}%>>
+                        <label class="form-check-label" for="gridRadiosA">30</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="product_size" id="gridRadiosB" value="32" <% if(up.product_size=='32'){%><%= 'checked'%><%}%>>
+                        <label class="form-check-label" for="gridRadiosB">32</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="product_size" id="gridRadiosC" value="36" <% if(up.product_size=='36'){%><%= 'checked'%><%}%>>
+                        <label class="form-check-label" for="gridRadiosC">36</label>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <div class="row mb-3">
+                    <label for="inputPassword" class="col-sm-4 col-form-label">Description</label>
+                    <div class="col-sm-8">
+                      <textarea class="form-control" name="product_description" placeholder="Description" style="height: 100px"><%= up.product_description%></textarea>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputNumber" class="col-sm-4 col-form-label">Product Single Image</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" type="file" id="formFile" name="Product_Image">
+                      <img src="<%= up.Product_Image%>" width="100px">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputNumber" class="col-sm-4 col-form-label">Product Multiple Images</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" type="file" id="formFile" name="Product_multi_Image" multiple>
+                      <% up.Product_multi_Image.forEach((v,i)=>{%>
+                        <img src="<%= v%>" width="50" height="30">
+                        <%})%>
+                    </div>
+                  </div>
+                <div class="row mb-3">
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit Form</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  
+<%- include("footer")%>

@@ -1,0 +1,72 @@
+<%- include("header")%>
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Update Extra_Category Data</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/admin/deshboard">Home</a></li>
+          <li class="breadcrumb-item">Extra_Category</li>
+          <li class="breadcrumb-item active">update Extra_Category</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-10">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Update Extra_Category</h5>
+
+              <!-- General Form Elements -->
+              <form action="/admin/extra_category/EditExtraData" method="post">
+                <input type="hidden" name="EditId" value="<%= up.id%>">
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-4 col-form-label">Category</label>
+                  <div class="col-sm-8">
+                    <select name="extracat_name" id="categoryID" onchange="return getSubcatData()" class="form-control">
+                        <option value="0">Please select Category</option>
+                        <% for(var ct of cr){%>
+                            <option value="<%= ct.id%>" <% if(ct.id == up.extracat_name){%><%= 'selected'%><%}%>><%= ct.category_name%></option>
+                        <%}%>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-4 col-form-label">Sub Category</label>
+                  <div class="col-sm-8">
+                    <select name="extra_sub_category_name" id="SubCatId" class="form-control">
+                        <option value="0">Please select Sub_Category</option>
+                        <% for(var ct of sr){%>
+                            <option value="<%= ct.id%>" <% if(ct.id == up.extra_sub_category_name){%><%= 'selected'%><%}%>><%= ct.sub_category_name%></option>
+                        <%}%>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-4 col-form-label">Enter Extra Category</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="extra_category_name" value="<%= up.extra_category_name%>" placeholder="Enter Name" class="form-control">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit Form</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  
+<%- include("footer")%>
