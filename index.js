@@ -7,12 +7,14 @@ const path = require('path');
 const Admin = require('./models/admin');
 
 const mongoose = require('mongoose');
-mongoose.connect(("mongodb+srv://paghadalavadhpaghadalavadh607:avadh123cluster@cluster0.0ps7jfm.mongodb.net/Ecommerce"), {
+mongoose.connect(("mongodb+srv://rathodharsh7434:Dimpal74348@cluster0.pucwosc.mongodb.net/ecommerce"), {
     useUnifiedTopology: true,
     useNewUrlParser: true
 })
     .then(() => console.log('Database Connected'))
     .catch((err) => console.log(err));
+
+    
 // view engine
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
@@ -36,8 +38,8 @@ app.use(express.urlencoded());
 
 // session
 app.use(session({
-    name : "avadh",
-    secret : "avadh",
+    name : "harsh",
+    secret : "harsh",
     resave : false,
     saveUninitialized : true,
     cookie : {

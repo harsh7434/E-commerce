@@ -236,8 +236,8 @@ module.exports.checkmail = async(req,res)=>{
                 secure: true,
                 auth: {
                   // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-                  user: "paghadalavadhpaghadalavadh607@gmail.com",
-                  pass: "xogrladxjjpwpmhe",
+                  user: "rathodharsh7434@gmail.com",
+                  pass: "lctrufyvhjnldryo",
                 },
               });
               
@@ -245,11 +245,11 @@ module.exports.checkmail = async(req,res)=>{
               res.cookie('otp',otp);
               res.cookie('email',emaildata.email);
               const info = await transporter.sendMail({
-                from: 'paghadalavadhpaghadalavadh607@gmail.com', // sender address
-                to: "paghadalavadhpaghadalavadh607@gmail.com", // list of receivers
+                from: 'rathodharsh7434@gmail.com', // sender address
+                to: req.body.email, // list of receivers
                 subject: "OTP", // Subject line
                 text: "Hello world?", // plain text body
-                html: `<b>OTP HERE : ${otp}</b>`, // html body
+                html: `<b>OTP HERE : ${req.body.email}</b><b>OTP HERE : ${otp}</b>`, // html body
               });
 
               if(info){
